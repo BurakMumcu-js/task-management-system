@@ -8,7 +8,7 @@ const login = async (req,res)=>{
     try {
         const {email,password} = req.body;
         const users = await User.find({email:email,password:password});
-        if (users){
+        if (!users){
             res.status(500).json({message:'hatalı bilgi giriş'})
         }
         else {
@@ -24,4 +24,6 @@ const login = async (req,res)=>{
     }
 }
 
-module.exports = login;
+module.exports = {
+    login
+};

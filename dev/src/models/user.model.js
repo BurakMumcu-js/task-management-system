@@ -17,4 +17,6 @@ const User = mongoose.model("User",{
     isAdmin:Boolean
 });
 
-module.exports = User;
+module.exports = {
+    User,
+};

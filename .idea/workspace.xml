@@ -26,6 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "js.last.introduce.type": "LET",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -42,7 +43,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699690669015</updated>
-      <workItem from="1699690670817" duration="7011000" />
+      <workItem from="1699690670817" duration="17169000" />
     </task>
     <servers />
   </component>
