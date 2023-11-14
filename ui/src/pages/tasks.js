@@ -1,9 +1,9 @@
 import react from 'react';
 
-const TasksComponent = () => {
+const TasksComponent = (props) => {
     return(
         <div style={{width:'100%'}}>
-            <h2 style={{textAlign:"center",fontWeight:"bold"}}>Kanal Adı</h2>
+            <h2 style={{textAlign:"center",fontWeight:"bold"}}>{props.channel}</h2>
         </div>
     )
 }
