@@ -4,7 +4,7 @@ const channelSchema = joi.object({
     _id: String,
     name:joi.string().min(3).max(30).required(),
     password:joi.string().min(8).regex(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/).required(),
-    creator:joi.string().min(2).max(30),
+    creator:joi.string().min(2).max(30).required(),
     users:Array,
 })
 
