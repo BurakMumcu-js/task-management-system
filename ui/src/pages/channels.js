@@ -3,16 +3,9 @@ import react from 'react';
 function ChannelsComponent() {
     return (
     <div style={{backgroundColor:"brown",height:'100%'}}>
-        <div className='card'>
-            <div className='card-header'>
-               Kanallar
-            </div>
-        </div>
-        <div className='card'>
-            <div className='card-header'>
-                Kanallar
-            </div>
-        </div>
+        <button style={{margin:5,borderRadius:5}}>
+            Kanallar
+        </button>
     </div>
     )
 }
