@@ -12,7 +12,10 @@ async function register  (req,res) {
     try {
 
         const {name,email,password} = req.body;
-
+        const users = await User.find({email:email});
+        if (users){
+            res.status(500).json({message:'Kullanıcı zaten mevcut'});
+        }
         let user = new User({
             _id:uuidv4(),
             name:name,

@@ -4,8 +4,10 @@ const app = express();
 const cors = require('cors')
 const registerRoutes = require('./src/routes/register/register.router')
 const loginRoutes = require('./src/routes/login/login.router');
+const channelsRoutes = require('./src/routes/channels/channels.router')
 app.use(cors());
 app.use(express.json());
+app.use('/channel',channelsRoutes);
 app.use('/auth',registerRoutes)
 app.use('/auth',loginRoutes);
 
