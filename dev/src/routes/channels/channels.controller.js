@@ -42,7 +42,10 @@ async function addChannel(req, res) {
 
             const result = await Channel.updateOne(
                 {_id: channelId},
-                {$push: {users: emailAdded}}
+                {$push: {users: {
+                   email: emailAdded,
+                    tasks: [],
+                        }}}
             );
 
             mongoose.disconnect();

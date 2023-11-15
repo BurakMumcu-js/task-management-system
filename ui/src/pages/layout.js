@@ -14,12 +14,12 @@ function LayoutComponent(){
             navigate('/login');
         }
     })
-
+/*
     const checkIsAdmin = () => {
         let user = JSON.parse(localStorage.getItem('user'))
         isAdmin = user.isAdmin
     }
-    checkIsAdmin()
+    checkIsAdmin() */
 
     return(
         <>
@@ -36,13 +36,9 @@ function LayoutComponent(){
                             <li className="nav-item active">
                                 <Link className='nav-link' to='/'>Home Page</Link>
                             </li>
-                            {
-                                isAdmin &&
                                 <li className="nav-item">
-                                    <Link className='nav-link' to='/products'>Add Task</Link>
+                                    <Link className='nav-link' to='/addTask'>Add Task</Link>
                                 </li>
-                            }
-
                             <li className="nav-item">
                                 <Link className='nav-link' to='/orders'>My Tasks</Link>
                             </li>
