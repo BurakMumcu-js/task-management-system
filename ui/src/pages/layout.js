@@ -40,10 +40,10 @@ function LayoutComponent(){
                                     <Link className='nav-link' to='/addTask'>Add Task</Link>
                                 </li>
                             <li className="nav-item">
-                                <Link className='nav-link' to='/orders'>My Tasks</Link>
+                                <Link className='nav-link' to='/myTasks'>My Tasks</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className='nav-link' to='/baskets'>My Notes</Link>
+                                <Link className='nav-link' to='/createChannel'>Create Channel</Link>
                             </li>
 
                         </ul>

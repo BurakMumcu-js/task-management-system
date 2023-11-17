@@ -4,7 +4,6 @@ const addTask = async (req,res) => {
     try {
         const { title, content, user, channel } = req.body;
         const channelExist = await Channel.findOne({ name: channel });
-        console.log(channelExist);
         if (!channelExist) {
             return res.status(500).json({ message: 'Kanal bulunamadı' });
         }

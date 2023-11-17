@@ -21,12 +21,27 @@ const AddTaskComponent = () => {
             creatorChannels.push(item)
         }
     })
-    function addTask(user,title,content,channel){
-        //todo: task eklemeleri için kanal>users>tasks hazırlanacak api ucu
+    function addTask(title,content,user,channel){
+        let model = {title:title,content:content,user:user,channel:channel}
+        console.log(model);
+        axios.post('http://localhost:5000/task/add',model)
+            .then(res => {
+                let alert = `
+         <div class="alert alert-success">
+            ${res.data.message}
+         </div>    
+        `;
+                const row = document.querySelector('.div');
+                // beforeBegin , afterBegin , beforeEnd , afterEnd
+                row.insertAdjacentHTML('beforeBegin',alert);
+                setTimeout(()=>{
+                    document.querySelector('.alert').remove();
+                },3000);
+            })
     }
 
     return (
-        <div>
+        <div className='div'>
             {
                 creatorChannels.length ?  creatorChannels.map(item => {
                     return(
@@ -45,7 +60,7 @@ const AddTaskComponent = () => {
                                                        <input style={{margin:10}} type='text' placeholder='enter title' onChange={(e)=>setTitle(e.target.value)}/>
                                                        <input style={{margin:10}} type='text' placeholder='enter content' onChange={(e)=>setContent(e.target.value)}/>
                                                    </div>
-                                                    <button  style={{margin:10,}} className='btn btn-success' onClick={()=>addTask(user.name,title,content,item.name)}>Add Task</button>
+                                                    <button  style={{margin:10,}} className='btn btn-success' onClick={()=>addTask(title,content,user.name,item.name)}>Add Task</button>
                                                 </div>
                                             </div>
                                         )

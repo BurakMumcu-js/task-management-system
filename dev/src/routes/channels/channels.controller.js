@@ -14,7 +14,7 @@ const createChannel = async (req, res) => {
                 password: password,
                 creator: creatorMail,
                 _id: uuidv4(),
-                users: [creatorMail],
+                users: [{name:creatorMail,tasks:[]}],
             })
             await channel.save();
             res.json({message: `${name} isimli kanalınız başarıyla oluşmuştur`});

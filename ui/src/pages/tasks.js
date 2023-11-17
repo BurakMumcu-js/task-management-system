@@ -1,4 +1,4 @@
-import react from 'react';
+import react, {useEffect} from 'react';
 
 const TasksComponent = (props) => {
     return(
