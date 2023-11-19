@@ -45,6 +45,7 @@ function LoginComponent(){
                                         Giriş Yap
                                     </button>
                                     <Link to='/register' className='mt-2' style={{float:"right"}}>Kayıt Ol</Link>
+                                    <Link to='/forgotPassword' className='mt-2' style={{float:"right",marginRight:5}}>Şifremi Unuttum</Link>
                                 </div>
                             </form>
                         </div>

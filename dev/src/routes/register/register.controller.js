@@ -22,6 +22,8 @@ async function register  (req,res) {
             email:email,
             password:password,
             isAdmin:false,
+            resetPasswordToken:null,
+            resetPasswordExpires:null,
         })
 
         await user.save();
@@ -35,7 +37,7 @@ async function register  (req,res) {
     }
     catch (err){
         res.status(500).json({
-            error: 'hata alındı',
+            error: 'hata basladi' + err + 'hata bitti',
         })
     }
 }

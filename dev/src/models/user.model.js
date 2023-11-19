@@ -7,6 +7,8 @@ const userSchema = joi.object({
     email:Joi.string().min(3).max(30).required(),
     password:Joi.string().min(8).regex(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/).required(),
     channels:Joi.array().min(0),
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     isAdmin:Boolean,
 })
 
@@ -16,6 +18,8 @@ const User = mongoose.model("User",{
     email:String,
     channels:Array,
     password:String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     isAdmin:Boolean
 });
 

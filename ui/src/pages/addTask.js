@@ -5,6 +5,7 @@ const AddTaskComponent = () => {
     const [channels, setChannels] = useState(null);
     const [title,setTitle] = useState('');
     const [content,setContent] = useState('');
+    const [deadline,setDeadline] = useState(null)
     const creatorChannels = []
     const user = JSON.parse(localStorage.getItem('user'));
     useEffect(() => {
@@ -21,9 +22,9 @@ const AddTaskComponent = () => {
             creatorChannels.push(item)
         }
     })
-    function addTask(title,content,user,channel){
-        let model = {title:title,content:content,user:user,channel:channel}
-        console.log(model);
+    function addTask(title,content,user,channel,deadline){
+        let model = {title:title,content:content,user:user,channel:channel,deadline:deadline}
+        console.log(deadline);
         axios.post('http://localhost:5000/task/add',model)
             .then(res => {
                 let alert = `
@@ -59,8 +60,13 @@ const AddTaskComponent = () => {
                                                    <div>
                                                        <input style={{margin:10}} type='text' placeholder='enter title' onChange={(e)=>setTitle(e.target.value)}/>
                                                        <input style={{margin:10}} type='text' placeholder='enter content' onChange={(e)=>setContent(e.target.value)}/>
+                                                       <input
+                                                           type='date'
+                                                           onChange={(e) => setDeadline(e.target.value)}
+                                                       />
+
                                                    </div>
-                                                    <button  style={{margin:10,}} className='btn btn-success' onClick={()=>addTask(title,content,user.name,item.name)}>Add Task</button>
+                                                    <button  style={{margin:10,}} className='btn btn-success' onClick={()=>addTask(title,content,user.name,item.name,deadline)}>Add Task</button>
                                                 </div>
                                             </div>
                                         )

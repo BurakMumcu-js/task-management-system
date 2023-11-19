@@ -10,6 +10,7 @@ import LayoutComponent from "./pages/layout";
 import AddTaskComponent from "./pages/addTask";
 import CreateChannelComponent from "./pages/createChannel";
 import MyTasksComponent from "./pages/myTasks";
+import PasswordComponent from "./pages/forgotPassword";
 
 function AppComponent  ()  {
   return(
@@ -22,8 +23,9 @@ function AppComponent  ()  {
                       <Route path='createChannel' element={<CreateChannelComponent/>}></Route>
                       <Route path='myTasks' element={<MyTasksComponent/>}></Route>
                   </Route>
-                  <Route path='login' element={<LoginComponent/>}></Route>
-                  <Route path='register' element={<RegisterComponent/>}></Route>
+                  <Route path='login' element={<LoginComponent/>}> </Route>
+                  <Route path='register' element={<RegisterComponent/>}> </Route>
+                  <Route path='forgotPassword' element={<PasswordComponent/>}> </Route>
               </Routes>
           </BrowserRouter>
       </>
