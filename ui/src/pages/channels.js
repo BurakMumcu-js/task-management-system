@@ -7,7 +7,17 @@ function ChannelsComponent({ onSelect }) {
     useEffect(() => {
         const getChannel = async () => {
             const response = await axios.get('http://localhost:5000/channel');
-            setChannels(response.data);
+            const localUser = JSON.parse(localStorage.getItem('user'))
+            let userChannels = [];
+            response.data.filter(item => {
+                item.users.map(user => {
+                    console.log(localUser);
+                    if (user.name === localUser.email){
+                        userChannels.push(item)
+                    }
+                })
+            })
+            if (userChannels.length) setChannels(userChannels);
         }
 
         getChannel();

@@ -11,29 +11,35 @@ function MyTasksComponent() {
         getChannel();
     }, [])
 
-    const taskIsFinished = (task,index,userName,channelName) => {
-        let model = {
-            task:task,
-            index:index,
-            userName:userName,
-            channelName:channelName
-        }
-
-        axios.post('http://localhost:5000/task/done',model)
-            .then(res => {
-                console.log(res.data);
-                let alert = `
+    const taskIsFinished  = async (task,index,userName,channelName) => {
+      try {
+          let model = {
+              task:task,
+              index:index,
+              userName:userName,
+              channelName:channelName
+          }
+            console.log(model);
+       let response = await axios.post('http://localhost:5000/task/done',model)
+              .then(res => {
+                  console.log(res.data);
+                  let alert = `
          <div class="alert alert-success">
             ${res.data}
          </div>    
         `;
-                const row = document.querySelector('.div');
-                // beforeBegin , afterBegin , beforeEnd , afterEnd
-                row.insertAdjacentHTML('beforeBegin',alert);
-                setTimeout(()=>{
-                    document.querySelector('.alert').remove();
-                },3000);
-            })
+                  const row = document.querySelector('.div');
+                  // beforeBegin , afterBegin , beforeEnd , afterEnd
+                  row.insertAdjacentHTML('beforeBegin',alert);
+                  setTimeout(()=>{
+                      document.querySelector('.alert').remove();
+                  },3000);
+              })
+              .catch(err => console.log(err));
+      }
+      catch (e) {
+          console.log(e);
+      }
     }
 
     return (

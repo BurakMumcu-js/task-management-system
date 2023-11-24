@@ -5,21 +5,20 @@ const passwordChange = async (req,res) => {
     try {
         const {email} = req.body;
         const user = await User.findOne({ email });
-
+// todo: error: Invalid login: 535-5.7.8 Username and Password not accepted. Learn more at\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials k26-20020a170906681a00b009dd678d7d3fsm2828427ejr.211 - gsmtp
+        // todo: üstteki hata mesajı alınıyor bakılacak
         if (!user) {
             return res.status(404).json({ message: 'Kullanıcı bulunamadı.' });
         }
-        console.log(user)
         const resetToken = crypto.randomBytes(20).toString('hex');
         user.resetPasswordToken = resetToken;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 saat boyunca kullanılabilir
         await user.save();
-        console.log(user)
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'yusuf.gurcan.21@gmail.com',
-                pass: 'ves2etuhu'
+                user: 'userGmail',
+                pass: 'userPassword'
             }
         });
 
@@ -31,7 +30,6 @@ const passwordChange = async (req,res) => {
         };
         await transporter.sendMail(mailOptions);
 
-        console.log('mailOptions')
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);

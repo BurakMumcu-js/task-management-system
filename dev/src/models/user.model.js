@@ -1,6 +1,7 @@
 const joi = require("joi");
 const Joi = require("joi");
 const mongoose = require("mongoose");
+
 const userSchema = joi.object({
     _id: String,
     name:Joi.string().min(3).max(30).required(),
@@ -11,6 +12,8 @@ const userSchema = joi.object({
     resetPasswordExpires: Date,
     isAdmin:Boolean,
 })
+
+
 
 const User = mongoose.model("User",{
     _id:String,
@@ -24,5 +27,6 @@ const User = mongoose.model("User",{
 });
 
 module.exports = {
+    userSchema,
     User,
 };
