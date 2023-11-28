@@ -11,7 +11,6 @@ function ChannelsComponent({ onSelect }) {
             let userChannels = [];
             response.data.filter(item => {
                 item.users.map(user => {
-                    console.log(localUser);
                     if (user.name === localUser.email){
                         userChannels.push(item)
                     }

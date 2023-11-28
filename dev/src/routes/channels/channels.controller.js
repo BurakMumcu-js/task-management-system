@@ -1,6 +1,7 @@
 const {Channel} = require('../../models/channel.model');
 const {v4: uuidv4} = require("uuid");
 const mongoose = require('mongoose')
+const {User} = require("../../models/user.model");
 
 const createChannel = async (req, res) => {
     try {
@@ -28,15 +29,11 @@ const createChannel = async (req, res) => {
 
 async function addChannel(req, res) {
     try {
-        const {emailAddedBy, emailAdded, channelName} = req.body;
+        const {emailAdded, channelName} = req.body;
         const channel = await Channel.find({name: channelName});
-        //Burada emailAddedBy almanın çok bir esprisi yok duruma göre çıkartılabilir
-        if (channel[0].users.includes(emailAdded)) {
-            return res.status(500).json({message: 'Kullanıcı zaten mevcut'});
-        }
-        else if (emailAddedBy !== channel[0].creator){
-            return res.status(500).json({message: 'Yönetici olmadan ekleyemezsiniz'});
-        }
+        const user = await User.findOne({email:emailAdded})
+        if (!user) return res.status(500).json({message:'böyle bir kullanıcı mevcut değil'});
+        if (channel[0].users.includes(emailAdded)) return res.status(500).json({message: 'Kullanıcı zaten mevcut'});
         else {
             const channelId = channel[0]._id;
 
