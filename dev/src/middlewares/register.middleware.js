@@ -1,7 +1,7 @@
 const express = require('express');
 const {v4: uuidv4} = require("uuid");
 const jwt = require("jsonwebtoken");
-const { User } = require('../../models/user.model')
+const { User } = require('../models/user.model')
 
 const secretKey =  'secretKey';
 const options = {

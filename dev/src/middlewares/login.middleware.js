@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { User } = require('../../models/user.model')
+const { User } = require('../models/user.model')
 const secretKey =  'secretKey';
 const options = {
     expiresIn: '1h'

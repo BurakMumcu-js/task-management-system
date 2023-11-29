@@ -48,7 +48,7 @@ const passwordChangeScreen = async (req,res) => {
     try {
         const { token } = req.params;
 
-
+        // şifre yenileme süresi dolmamış kullanıcıyı bulur
         const user = await User.findOne({
             resetPasswordToken: token,
             resetPasswordExpires: { $gt: Date.now() }
@@ -57,7 +57,7 @@ const passwordChangeScreen = async (req,res) => {
         if (!user) {
             return res.status(400).json({ message: 'Geçersiz veya süresi dolmuş token.' });
         }
-
+        // reset-password.ejs dosyası token ile birlikte render edilir
         res.render('reset-password', { token });
     } catch (error) {
         console.error(error);
@@ -78,7 +78,7 @@ const savePasswordScreen = async (req,res) => {
         if (!user) {
             return res.status(400).json({ message: 'Geçersiz veya süresi dolmuş token.' });
         }
-
+            //şifre güncellenir
         user.password = password;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;

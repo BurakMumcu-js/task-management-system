@@ -1,6 +1,4 @@
-const {Channel} = require("../../models/channel.model");
 const {addTaskMiddleware, doneTaskMiddleware} = require('../../middlewares/tasks.middleware')
-
 
 const addTask = async (req, res) => {
     try {

@@ -31,14 +31,14 @@ const addTaskMiddleware = async (req, res, next) => {
 
 const doneTaskMiddleware = async (req,res,next) => {
     try {
-        const { task, index, userName, channelName } = req.body;
+        const { index, userName, channelName } = req.body;
         const channel = await Channel.findOne({ name: channelName });
         const user = channel.users.find(user => user.name === userName);
         user.tasks = user.tasks.filter((taskItem, currentIndex) => currentIndex !== index);
         await channel.save();
         res.send('Task başarıyla tamamlandı');
     } catch (e) {
-        res.status(500).json({message:e});
+       next(e);
     }
 }
 

@@ -16,12 +16,12 @@ function LayoutComponent(){
             navigate('/login');
         }
     })
-/*
+
     const checkIsAdmin = () => {
         let user = JSON.parse(localStorage.getItem('user'))
         isAdmin = user.isAdmin
     }
-    checkIsAdmin() */
+    checkIsAdmin()
 
     return(
         <>
@@ -47,7 +47,12 @@ function LayoutComponent(){
                             <li className="nav-item">
                                 <Link className='nav-link' to='/createChannel'>Create Channel</Link>
                             </li>
-
+                            {
+                                isAdmin &&
+                                <li className="nav-item">
+                                    <Link className='nav-link' to='/deleteChannel'>Delete Channel</Link>
+                                </li>
+                            }
                         </ul>
                         <button onClick={logout} className="btn btn-outline-danger" type="submit">Exit</button>
                     </div>
