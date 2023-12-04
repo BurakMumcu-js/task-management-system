@@ -27,7 +27,6 @@ async function addChannel(req, res) {
     try {
      await addChannelMiddleware(req,res);
     } catch (error) {
-        console.error('Hata:', error);
         res.status(500).json({message: 'Bir hata oluştu'});
     }
 }
@@ -35,7 +34,7 @@ async function addChannel(req, res) {
 async function findChannels(req, res) {
     try {
         const channels = await Channel.find();
-        res.json(channels);
+        res.status(200).json(channels);
     } catch (error) {
         res.status(500).json({message: 'Bir hata oluştu'});
     }

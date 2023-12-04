@@ -31,10 +31,31 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/Monster/Documents/GitHub/task-management-system/dev/node_modules/jest&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="createChannel function" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/dev/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$/dev" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/dev/src/__tests__/channels.test.js" />
+      <test-names>
+        <test-name value="createChannel function" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.createChannel function" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -53,7 +74,12 @@
       <workItem from="1700783146732" duration="5046000" />
       <workItem from="1701001992246" duration="55000" />
       <workItem from="1701206877204" duration="2763000" />
-      <workItem from="1701275662930" duration="4029000" />
+      <workItem from="1701275662930" duration="4296000" />
+      <workItem from="1701552955991" duration="4377000" />
+      <workItem from="1701631850895" duration="1263000" />
+      <workItem from="1701689506402" duration="300000" />
+      <workItem from="1701720253591" duration="2009000" />
+      <workItem from="1701722880783" duration="855000" />
     </task>
     <servers />
   </component>

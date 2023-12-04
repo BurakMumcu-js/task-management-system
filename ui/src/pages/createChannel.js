@@ -10,8 +10,10 @@ const CreateChannelComponent = () => {
             let model = {name:name,password:password,creatorMail:creatorMail}
             let response = await axios.post('http://localhost:5000/channel/create',model)
                 .then(res => {
+                    console.log(res);
                     let alert = `
          <div class="alert alert-success">
+            ${res.data.message}
             ${res.data.message}
          </div>    
         `;
@@ -25,6 +27,7 @@ const CreateChannelComponent = () => {
         } catch (e) {
             console.log(e);
         }
+
     }
 
     const [name,setName] = useState('');

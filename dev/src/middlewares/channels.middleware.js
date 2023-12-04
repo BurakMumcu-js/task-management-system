@@ -18,7 +18,7 @@ const createChannelMiddleware = async (req, res, next) => {
                 users: [{name: creatorMail, tasks: []}],
             })
             await channel.save();
-            res.json({message: `${name} isimli kanalınız başarıyla oluşmuştur`});
+            res.json({message: `${name} isimli kanalınız başarıyla oluşmuştur`,channel:channel});
         }
     } catch (error) {
        next(error)
