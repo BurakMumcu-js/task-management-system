@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const { User } = require('../models/user.model')
-const secretKey =  'secretKey';
+const secretKey = process.env.secretKey
 const options = {
-    expiresIn: '1h'
+    expiresIn: process.env.expireIn
 }
 
 const loginMiddleware = async (req,res,next) => {

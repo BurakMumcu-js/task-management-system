@@ -40,25 +40,10 @@ async function findChannels(req, res) {
     }
 }
 
-async function findChannelsByID(req, res) {
-    try {
-        const channelId = req.params.id;
 
-        const channel = await Channel.findById(channelId);
-
-        if (!channel) {
-            return res.status(404).json({message: 'Kanal bulunamadı'});
-        }
-
-        res.json(channel);
-    } catch (error) {
-        res.status(500).json({message: 'Bir hata oluştu'});
-    }
-}
 
 module.exports = {
     deleteChannel,
-    findChannelsByID,
     findChannels,
     createChannel,
     addChannel,

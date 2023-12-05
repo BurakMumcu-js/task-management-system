@@ -8,6 +8,7 @@ const loginRoutes = require('./src/routes/login/login.router');
 const channelsRoutes = require('./src/routes/channels/channels.router')
 const tasksRoutes = require('./src/routes/tasks/tasks.router');
 const passwordRoutes = require('./src/routes/password/password.router');
+require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 app.use('/password',passwordRoutes)
@@ -16,21 +17,17 @@ app.use('/auth',registerRoutes)
 app.use('/auth',loginRoutes);
 app.use('/task',tasksRoutes);
 
-const uri = "mongodb+srv://burakmumcu2534:1@task-management-databas.idwb5wa.mongodb.net/";
+const uri = process.env.MongoUri;
 mongoose.connect(uri).then(res => {
-   // console.log('db connected')
+    console.log('db connected')
 })
     .catch(err => {
         console.log(err)
     })
 
-const server = net.createServer();
-
-const port = 5000
-server.on('listening', () => {
+const port = process.env.PORT || 5000
+const server = net.createServer().listen(port, () => {
     console.log(`Port ${port} dinleme modunda...`);
 });
-
-server.listen(port);
 
 module.exports = server
