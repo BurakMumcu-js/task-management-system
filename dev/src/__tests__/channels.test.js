@@ -1,17 +1,13 @@
 const request = require('supertest');
 const app = require('../../app');
+require('dotenv').config({path: 'src/.env'});
+const uri = process.env.MongoUri;
+const mongoose = require("mongoose");
+
+mongoose.connect(uri)
+
 const {Channel} = require('../models/channel.model')
 const {User} = require('../models/user.model');
-const {beforeTests,afterTests} = require('/setup.test');
-
-beforeAll(async () =>{
-    await beforeTests();
-})
-
-afterAll(async () => {
-    await afterTests();
-})
-
 describe('POST channel/create ',()=>{
 
     let testChannelId;

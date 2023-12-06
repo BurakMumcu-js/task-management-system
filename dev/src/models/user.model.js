@@ -9,7 +9,10 @@ const userSchema = joi.object({
     password:Joi.string().min(8).regex(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-])/).required(),
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    isAdmin:Boolean,
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
 })
 
 

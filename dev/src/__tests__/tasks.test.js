@@ -47,9 +47,9 @@ describe('POST task/add', () => {
                 channel: 'TestKanal',
                 deadline: '',
             })
+        expect(response.status).toBe(500);
+        expect(response.body.message).toBe('Kanal bulunamadı');
     })
-    expect(response.status).toBe(500);
-    expect(response.body.message).toBe('Kanal bulunamadı');
 });
 
 describe('POST task/done', () => {

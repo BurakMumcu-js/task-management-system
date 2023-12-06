@@ -1,11 +1,26 @@
-const {loginMiddleware} = require("../../middlewares/login.middleware");
-const login = async (req,res)=>{
-    try {
-       await loginMiddleware(req,res);
-    }
-    catch (error){
-        res.status(500).json({message:error.message})
-    }
+const {User} = require("../../models/user.model");
+const jwt = require("jsonwebtoken");
+const {UserNotExists} = require('../../lib/error')
+require('dotenv').config({path: 'src/.env'});
+const login = async (req,res,next)=>{
+        try {
+            const {email,password} = req.body;
+            const users = await User.find({email:email,password:password});
+            if (!users){
+              throw UserNotExists
+            }
+            else {
+                const payload = {
+                    user:users[0]
+                }
+                const token = jwt.sign(payload,process.env.secretKey,process.env.options);
+                res.json({user:users[0],token:token})
+                next()
+            }
+        }
+        catch (error){
+            next(error);
+        }
 }
 
 module.exports = {
