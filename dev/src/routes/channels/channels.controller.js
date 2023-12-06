@@ -1,4 +1,4 @@
-const {Channel} = require('../../models/channel.model');
+const {ChannelService} = require('../../services/ChannelService');
 const {v4: uuidv4} = require("uuid");
 const {User} = require("../../models/user.model");
 const mongoose = require("mongoose");
@@ -8,18 +8,17 @@ const express = require("express");
 const createChannel = async (req, res,next) => {
     try {
         const {name, password, creatorMail} = req.body
-        const channelExist = await Channel.find({name: name});
-        if (channelExist === []) {
+        const channelExist = await ChannelService.findOne({name: name});
+        if (!channelExist) {
            throw ChannelNotExists
         } else {
-            let channel = new Channel({
+            let channel = new ChannelService.create({
                 name: name,
                 password: password,
                 creator: creatorMail,
                 _id: uuidv4(),
                 users: [{name: creatorMail, tasks: []}],
             })
-            await channel.save();
             res.json({message: `${name} isimli kanalınız başarıyla oluşmuştur`,channel:channel});
         }
     } catch (error) {
@@ -30,26 +29,26 @@ const createChannel = async (req, res,next) => {
 const deleteChannel = async (req,res,next) => {
     try {
         const {channelName} = req.body;
-        const channel = await Channel.findOne({name: channelName});
+        const channel = await ChannelService.findOne({name: channelName});
         if (!channel) throw ChannelNotExists;
-        await Channel.deleteOne({name: channelName});
+        await ChannelService.delete({name: channelName});
         res.json({message: `${channelName} isimli kanal başarıyla silindi`});
     } catch (e) {
         next(e);
     }
 }
 
-async function addChannel(req, res) {
+async function addChannel(req, res,next) {
     try {
         const {emailAdded, channelName} = req.body;
-        const channel = await Channel.find({name: channelName});
+        const channel = await ChannelService.findOne({name: channelName});
         const user = await User.findOne({email: emailAdded})
         if (!user) throw UserNotExists
-        if (channel[0].users.includes(emailAdded)) throw UserExısts;
+        if (channel.users.includes(emailAdded)) throw UserExısts;
         else {
             const channelId = channel[0]._id;
 
-            const result = await Channel.updateOne(
+            const result = await ChannelService.updateWhere(
                 {_id: channelId},
                 {
                     $push: {
@@ -63,7 +62,7 @@ async function addChannel(req, res) {
 
             mongoose.disconnect();
 
-            res.json({message: 'Kullanıcı başarıyla eklendi', channel: result});
+            res.json({message: 'Kullanıcı başarıyla eklendi'});
         }
     } catch (error) {
         next(error);
@@ -72,7 +71,7 @@ async function addChannel(req, res) {
 
 async function findChannels(req, res,next) {
     try {
-        const channels = await Channel.find();
+        const channels = await ChannelService.find();
         res.status(200).json(channels);
     } catch (error) {
         next(error)

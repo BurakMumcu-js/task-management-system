@@ -1,13 +1,13 @@
+const {ChannelService} = require('../../services/ChannelService')
+const {ChannelNotExists, UserNotExists} = require("../../lib/error");
 
-const {Channel} = require("../../models/channel.model");
-
-const addTask = async (req, res) => {
+const addTask = async (req, res, next) => {
     try {
-        const { title, content, user, channel, deadline } = req.body;
-        const channelExist = await Channel.findOne({ name: channel });
+        const {title, content, user, channel, deadline} = req.body;
+        const channelExist = await ChannelService.findOne({name: channel});
 
         if (!channelExist) {
-            return res.status(500).json({ message: 'Kanal bulunamadı' });
+            throw ChannelNotExists;
         }
 
         const channelId = channelExist._id;
@@ -20,25 +20,26 @@ const addTask = async (req, res) => {
                 deadline: deadline,
             });
 
-            await Channel.findByIdAndUpdate(channelId, channelExist);
+            await ChannelService.findByIdAndUpdate(channelId, channelExist);
 
-            res.status(200).json({ message: 'Görev başarıyla eklendi' });
+            res.status(200).json({message: 'Görev başarıyla eklendi'});
+            next()
         } else {
-            res.status(500).json({ message: 'Görev ekleme başarısız' });
+            throw UserNotExists;
         }
     } catch (e) {
-        res.status(500).json({ message: e.message });
+        next(e);
     }
 };
 
 
-const doneTask = async (req, res,next) => {
+const doneTask = async (req, res, next) => {
     try {
-        const { index, userName, channelName } = req.body;
-        const channel = await Channel.findOne({ name: channelName });
+        const {index, userName, channelName} = req.body;
+        const channel = await ChannelService.findOne({name: channelName});
         const user = channel.users.find(user => user.name === userName);
         user.tasks = user.tasks.filter((taskItem, currentIndex) => currentIndex !== index);
-        await channel.save();
+        await ChannelService.update(channel._id,channel);
         res.send('Task başarıyla tamamlandı');
     } catch (e) {
         next(e);

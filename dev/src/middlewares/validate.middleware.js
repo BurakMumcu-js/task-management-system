@@ -1,5 +1,6 @@
 const {userSchema} = require('../models/user.model')
-const validateUserMiddleware = (schema) => {
+const {channelSchema} = require('../models/channel.model')
+const validateMiddleware = (schema) => {
     return async (req, res, next) => {
         try {
             await schema.validateAsync(req.body, { abortEarly: false });
@@ -10,8 +11,9 @@ const validateUserMiddleware = (schema) => {
     };
 };
 
-const validateUser = validateUserMiddleware(userSchema);
-
+const validateUser = validateMiddleware(userSchema);
+const validateChannel = validateMiddleware(channelSchema)
 module.exports = {
-    validateUser
+    validateUser,
+    validateChannel,
 };
