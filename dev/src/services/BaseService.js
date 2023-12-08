@@ -23,6 +23,9 @@ class BaseService {
     delete(id) {
         return this.BaseModel.findByIdAndDelete(id);
     }
+    find(){
+        return this.BaseModel.find(); 
+    }
 
 
 }

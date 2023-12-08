@@ -1,4 +1,4 @@
-const {ChannelService} = require('../../services/ChannelService');
+const ChannelService = require('../../services/ChannelService');
 const {v4: uuidv4} = require("uuid");
 const {User} = require("../../models/user.model");
 const mongoose = require("mongoose");
@@ -71,14 +71,15 @@ async function addChannel(req, res,next) {
 
 async function findChannels(req, res,next) {
     try {
-        const channels = await ChannelService.find();
+        console.log('step1');
+        const channels = ChannelService.list();
+        console.log('step2');
         res.status(200).json(channels);
+        console.log('step3')
     } catch (error) {
         next(error)
     }
 }
-
-
 
 module.exports = {
     deleteChannel,

@@ -7,6 +7,9 @@ class ChannelService extends BaseService {
     delete(where){
         return Channel.deleteOne(where);
     }
+    findOne(where) {
+        return Channel.findOne(where);
+    }
 }
 
 module.exports = new ChannelService();

@@ -1,4 +1,4 @@
-const {UserService} = require('../../services/UserService');
+const UserService = require('../../services/UserService');
 const jwt = require("jsonwebtoken");
 const {UserNotExists} = require('../../lib/error')
 require('dotenv').config({path: 'src/.env'});

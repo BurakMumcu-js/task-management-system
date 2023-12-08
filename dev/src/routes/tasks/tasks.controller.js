@@ -1,4 +1,4 @@
-const {ChannelService} = require('../../services/ChannelService')
+const ChannelService = require('../../services/ChannelService')
 const {ChannelNotExists, UserNotExists} = require("../../lib/error");
 
 const addTask = async (req, res, next) => {

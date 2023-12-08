@@ -28,7 +28,7 @@ mongoose.connect(uri).then(res => {
         console.log(err)
     })
 
-const port = process.env.PORT || 5001
+const port = process.env.PORT || 5000
 const server = net.createServer().listen(port, () => {
     console.log(`Port ${port} dinleme modunda...`);
 });
