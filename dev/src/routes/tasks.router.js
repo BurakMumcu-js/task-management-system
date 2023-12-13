@@ -1,4 +1,4 @@
-const tasksController = require('./tasks.controller')
+const tasksController = require('../controllers/tasks.controller')
 const express = require('express');
 const router = express.Router();
 router.post('/add',tasksController.addTask);

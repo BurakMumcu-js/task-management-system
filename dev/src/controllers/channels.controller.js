@@ -1,8 +1,8 @@
-const ChannelService = require('../../services/ChannelService');
+const ChannelService = require('../services/ChannelService');
 const {v4: uuidv4} = require("uuid");
-const {User} = require("../../models/user.model");
+const {User} = require("../models/user.model");
 const mongoose = require("mongoose");
-const {ChannelNotExists,UserNotExists, UserExısts} = require("../../lib/error");
+const {ChannelNotExists,UserNotExists, UserExısts} = require("../lib/error");
 const express = require("express");
 
 const createChannel = async (req, res,next) => {
@@ -71,11 +71,9 @@ async function addChannel(req, res,next) {
 
 async function findChannels(req, res,next) {
     try {
-        console.log('step1');
-        const channels = ChannelService.list();
-        console.log('step2');
+        const channels = await ChannelService.list();
         res.status(200).json(channels);
-        console.log('step3')
+        next();
     } catch (error) {
         next(error)
     }

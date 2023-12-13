@@ -1,8 +1,8 @@
 const {v4: uuidv4} = require("uuid");
 const jwt = require("jsonwebtoken");
-const UserService = require('../../services/UserService');
+const UserService = require('../services/UserService');
 require('dotenv').config({path: 'src/.env'});
-const {UserExısts} = require('../../lib/error')
+const {UserExısts} = require('../lib/error')
 
 async function register  (req,res,next) {
     try {

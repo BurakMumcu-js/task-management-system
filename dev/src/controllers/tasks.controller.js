@@ -1,5 +1,5 @@
-const ChannelService = require('../../services/ChannelService')
-const {ChannelNotExists, UserNotExists} = require("../../lib/error");
+const ChannelService = require('../services/ChannelService')
+const {ChannelNotExists, UserNotExists} = require("../lib/error");
 
 const addTask = async (req, res, next) => {
     try {
@@ -20,7 +20,7 @@ const addTask = async (req, res, next) => {
                 deadline: deadline,
             });
 
-            await ChannelService.findByIdAndUpdate(channelId, channelExist);
+            await ChannelService.updateWhere({_id:channelId}, channelExist);
 
             res.status(200).json({message: 'Görev başarıyla eklendi'});
             next()

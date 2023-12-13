@@ -1,4 +1,4 @@
-const passwordController = require('./password.controller');
+const passwordController = require('../controllers/password.controller');
 const express = require('express');
 const router = express.Router();
 router.post('/change', passwordController.passwordChange);
