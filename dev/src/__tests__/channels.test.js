@@ -17,7 +17,7 @@ describe('POST channel/create ',()=>{
             .post('/channel/create')
             .send({
                 name: 'TestChannel',
-                password: 'testPassword',
+                password: 'testPassword123.',
                 creatorMail: 'test@example.com',
             });
 

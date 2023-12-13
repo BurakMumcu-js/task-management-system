@@ -54,7 +54,7 @@ describe('POST task/add', () => {
 
 describe('POST task/done', () => {
     test('task must be done with success',async () => {
-        jest.spyOn(Channel, 'find').mockResolvedValue([{ name: 'ExistingChannel',users:[{name:'testUser',tasks:[{title:'testTask'}]}] }]);
+        jest.spyOn(Channel, 'find').mockResolvedValue([{ name: 'ExistingChannel',users:[{name:'testUser',tasks:[{title:'testTask',content:"content"}]}] }]);
         const response = request(app)
             .post('task/done')
             .send({

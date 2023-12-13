@@ -2,15 +2,15 @@ const ChannelService = require('../services/ChannelService');
 const {v4: uuidv4} = require("uuid");
 const {User} = require("../models/user.model");
 const mongoose = require("mongoose");
-const {ChannelNotExists,UserNotExists, UserExısts} = require("../lib/error");
+const {ChannelNotExists,UserNotExists, UserExısts,ChannelExists} = require("../lib/error");
 const express = require("express");
 
 const createChannel = async (req, res,next) => {
     try {
         const {name, password, creatorMail} = req.body
         const channelExist = await ChannelService.findOne({name: name});
-        if (!channelExist) {
-           throw ChannelNotExists
+        if (channelExist) {
+           throw ChannelExists
         } else {
             let channel = new ChannelService.create({
                 name: name,
@@ -19,7 +19,7 @@ const createChannel = async (req, res,next) => {
                 _id: uuidv4(),
                 users: [{name: creatorMail, tasks: []}],
             })
-            res.json({message: `${name} isimli kanalınız başarıyla oluşmuştur`,channel:channel});
+            res.status(200).json({message: `${name} isimli kanalınız başarıyla oluşmuştur`,channel:channel});
         }
     } catch (error) {
         next(error)

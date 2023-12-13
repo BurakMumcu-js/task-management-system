@@ -3,14 +3,15 @@ const express = require('express')
 const app = express();
 const http = require('http');
 const cors = require('cors')
-const config = require('./src/config');
+const corsOptions = require('./src/config');
+
 const {mainErrorHandler} = require('./src/middlewares/error.middleware')
 const registerRoutes = require('./src/routes/register.router')
 const loginRoutes = require('./src/routes/login.router');
 const channelsRoutes = require('./src/routes/channels.router')
 const tasksRoutes = require('./src/routes/tasks.router');
 const passwordRoutes = require('./src/routes/password.router');
-config();
+
 require('dotenv').config({path: 'src/.env'});
 app.use(express.json());
 app.use('/password',passwordRoutes)
