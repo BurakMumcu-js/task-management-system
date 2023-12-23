@@ -30,14 +30,14 @@ const TasksComponent = (props) => {
                             props.channel.users.map(user => {
                                 return (
                                     <div className='card' style={{width:250,margin:30}}>
-                                        <div className='card-header'>{user.name}</div>
+                                        <div className='card-header'>{user.email}</div>
                                         <div className='card-body'>
                                             {
                                                 user.tasks.map((task,index) => {
                                                     return(
                                                         <div className='card'style={{margin:10}} key={index}>
                                                             <div className='card-header'>{index + 1}. {task.title}</div>
-                                                            <div className='card-body'>{task.content}<br/>{task?.deadline}</div>
+                                                            <div className={`card-body ${new Date() > new Date(task.deadline) ? 'alert alert-danger' : ''}`} style={{margin:0}}>{task.content}<br/>{task?.deadline}</div>
                                                         </div>
                                                     )
                                                 })

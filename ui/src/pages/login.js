@@ -33,7 +33,6 @@ function LoginComponent(){
                                     <label htmlFor='email'>Mail Adresi</label>
                                     <input value={email} onChange={(e)=>{
                                         setEmail(e.target.value)
-                                        console.log(e.target.value)
                                     }} type='email' className='form-control' id='email' name='email' />
                                 </div>
                                 <div className='form-group mt-2'>

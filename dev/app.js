@@ -11,14 +11,9 @@ const config = require('./src/config');
 const cors = require("cors");
 const corsOptions = require("./src/config/cors");
 require('dotenv').config({path: 'src/.env'});
+//config();
+app.use(cors());
 app.use(express.json());
-app.use('/password',passwordRoutes)
-app.use('/channel',channelsRoutes);
-app.use('/auth',registerRoutes)
-app.use('/auth',loginRoutes);
-app.use('/task',tasksRoutes);
-app.use(mainErrorHandler)
-config();
 const uri = process.env.MongoUri;
 mongoose.connect(uri).then(res => {
     console.log('db connected')
@@ -27,7 +22,14 @@ mongoose.connect(uri).then(res => {
         console.log(err)
     })
 
-const port = process.env.PORT || 1903
+app.use('/password',passwordRoutes)
+app.use('/channel',channelsRoutes);
+app.use('/auth',registerRoutes)
+app.use('/auth',loginRoutes);
+app.use('/task',tasksRoutes);
+app.use(mainErrorHandler)
+
+const port = process.env.PORT || 5000
 
 const server = app.listen(port,() => {
     console.log(`Port ${port} dinleme modunda...`);

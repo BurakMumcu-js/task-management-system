@@ -42,7 +42,7 @@ const AddTaskComponent = () => {
     }
 
     return (
-        <div className='div'>
+        <div className='div' style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:20,margin:20}}>
             {
                 creatorChannels.length ?  creatorChannels.map(item => {
                     return(
@@ -54,8 +54,8 @@ const AddTaskComponent = () => {
                                 {
                                     item?.users.map(user => {
                                         return(
-                                            <div style={{width:'100%',margin:5}} className='border'>
-                                                <h3 style={{width:'100%',textAlign:'center',margin:10}}>{user.name}</h3>
+                                            <div style={{margin:5}} className='border'>
+                                                <h3 style={{textAlign:'center',margin:10}}>{user.email}</h3>
                                                 <div style={{display:"flex",justifyContent:"space-between"}}>
                                                    <div>
                                                        <input style={{margin:10}} type='text' placeholder='enter title' onChange={(e)=>setTitle(e.target.value)}/>

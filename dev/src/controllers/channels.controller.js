@@ -12,7 +12,7 @@ const createChannel = async (req, res,next) => {
         if (channelExist) {
            throw ChannelExists
         } else {
-            let channel = new ChannelService.create({
+             ChannelService.create({
                 name: name,
                 password: password,
                 creator: creatorMail,
@@ -46,8 +46,7 @@ async function addChannel(req, res,next) {
         if (!user) throw UserNotExists
         if (channel.users.includes(emailAdded)) throw UserExısts;
         else {
-            const channelId = channel[0]._id;
-
+            const channelId = channel._id;
             const result = await ChannelService.updateWhere(
                 {_id: channelId},
                 {
@@ -59,7 +58,7 @@ async function addChannel(req, res,next) {
                     }
                 }
             );
-
+            console.log('step 7')
             mongoose.disconnect();
 
             res.json({message: 'Kullanıcı başarıyla eklendi'});

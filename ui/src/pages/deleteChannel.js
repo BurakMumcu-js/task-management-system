@@ -46,7 +46,7 @@ const DeleteChannelComponent = () => {
                 <label className='text-secondary' style={{marginLeft:10}}>Channel Name</label>
                 <input style={{margin:10}} type='text' value={channel} onChange={(e)=>setChannel(e.target.value)} />
                 <button style={{margin:10}} className='btn btn-outline-primary' onClick={()=>channelDelete(channel)}>
-                    Create Channel
+                    Delete Channel
                 </button>
             </div>
         </div>

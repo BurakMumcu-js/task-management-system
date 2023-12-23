@@ -11,7 +11,7 @@ function ChannelsComponent({ onSelect }) {
             let userChannels = [];
             response.data.filter(item => {
                 item.users.map(user => {
-                    if (user.name === localUser.email){
+                    if (user.email === localUser.email){
                         userChannels.push(item)
                     }
                 })
@@ -24,7 +24,7 @@ function ChannelsComponent({ onSelect }) {
 
 
     return (
-        <div style={{ backgroundColor: 'brown', height: '100%' }}>
+        <div style={{ backgroundColor:'#00428C', height: '100%',display:'flex',flexDirection:'column' }}>
             {channels ? (
                 channels.map((item) => (
                     <button

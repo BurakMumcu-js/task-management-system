@@ -4,6 +4,7 @@ const {UserNotExists} = require('../lib/error')
 require('dotenv').config({path: 'src/.env'});
 const login = async (req,res,next)=>{
         try {
+            console.log('backende gidiyor');
             const {email,password} = req.body;
             const user = await UserService.findOne({email: email, password: password});
             if (!user){

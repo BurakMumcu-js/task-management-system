@@ -18,8 +18,7 @@ function MyTasksComponent() {
               userName:userName,
               channelName:channelName
           }
-          console.log(model);
-       axios.post('http://localhost:5000/task/done',model)
+      await axios.post('http://localhost:5000/task/done',model)
               .then(res => {
                   console.log(res.data);
                   let alert = `
@@ -42,20 +41,21 @@ function MyTasksComponent() {
     }
 
     return (
-        <div style={{flexDirection:"row"}}>
+        <div >
             <div className='div'></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',justifyContent:'center'}}>
             { channels ? channels.map(channel => (
                 <div className='card' style={{margin:50,width:300}} key={channel._id}>
                     <div className='card-header'>{channel.name}</div>
                     <div className='card-body'>
                         {channel.users.map(user => {
-                            if (user.name === JSON.parse(localStorage.getItem('user')).email) {
+                            if (user.email === JSON.parse(localStorage.getItem('user')).email) {
                                 return user.tasks.map((task, index) => (
                                     <div className='card'style={{margin:10}} key={index}>
                                         <div className='card-header'>{index + 1}. {task.title}</div>
-                                        <div className={`card-body ${new Date() > new Date(task.deadline) ? 'alert alert-danger' : ''}`} style={{display:"flex"}}>
+                                        <div className={`card-body ${new Date() > new Date(task.deadline) ? 'alert alert-danger' : ''}`} style={{display:"flex",justifyContent:'space-between',margin:0}}>
                                             {task.content}<br/>{task?.deadline}
-                                        <button onClick={()=>taskIsFinished(index,user.name,channel.name)} className='btn btn-success' style={{padding:0}}>
+                                        <button onClick={()=>taskIsFinished(index,user.name,channel.name)} className='btn btn-success' style={{height:30,padding:0}}>
                                             <span className="material-symbols-outlined">done</span></button>
                                         </div>
                                     </div>
@@ -66,6 +66,8 @@ function MyTasksComponent() {
                     </div>
                 </div>
             )) : ''}
+            </div>
+         
         </div>
     )
 }
