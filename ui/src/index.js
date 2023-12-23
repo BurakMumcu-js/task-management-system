@@ -12,6 +12,7 @@ import CreateChannelComponent from "./pages/createChannel";
 import MyTasksComponent from "./pages/myTasks";
 import PasswordComponent from "./pages/forgotPassword";
 import DeleteChannelComponent from "./pages/deleteChannel";
+import ResetPasswordForm from './pages/resetPassword';
 
 function AppComponent  ()  {
   return(
@@ -28,6 +29,7 @@ function AppComponent  ()  {
                   <Route path='login' element={<LoginComponent/>}> </Route>
                   <Route path='register' element={<RegisterComponent/>}> </Route>
                   <Route path='forgotPassword' element={<PasswordComponent/>}> </Route>
+                  <Route path='resetPasswordForm' element={<ResetPasswordForm/>}></Route>
               </Routes>
           </BrowserRouter>
       </>
