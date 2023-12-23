@@ -5,7 +5,6 @@ import { ChannelSchema } from '../models/channel.model';
 const validateMiddleware = (schema: any) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req);
       await schema.validateAsync(req.body, { abortEarly: false });
       next();
     } catch (error) {

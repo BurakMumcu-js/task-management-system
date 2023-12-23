@@ -10,7 +10,6 @@ const CreateChannelComponent = () => {
             let model = {name:name,password:password,creator:creatorMail}
             axios.post('http://localhost:5000/channel/create',model)
                 .then(res => {
-                    console.log(res);
                     let alert = `
          <div class="alert alert-success">
             ${res.data.message}

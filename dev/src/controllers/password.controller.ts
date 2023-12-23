@@ -33,7 +33,6 @@ const passwordChange = async (req: Request, res: Response) => {
 
         await sgMail.send(msg);
 
-        console.log('E-posta gönderildi.');
         res.status(200).json({ message: 'Şifre sıfırlama e-postası gönderildi.' });
     } catch (e:any) {
         console.error(e);

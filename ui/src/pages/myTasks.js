@@ -20,7 +20,6 @@ function MyTasksComponent() {
           }
       await axios.post('http://localhost:5000/task/done',model)
               .then(res => {
-                  console.log(res.data);
                   let alert = `
          <div class="alert alert-success">
             ${res.data}

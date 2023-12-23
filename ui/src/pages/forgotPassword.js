@@ -10,12 +10,7 @@ const PasswordComponent = () => {
             email:email
         }
         axios.post('http://localhost:5000/password/change',model)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            
     }
 
     return (

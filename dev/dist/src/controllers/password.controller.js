@@ -39,7 +39,6 @@ const passwordChange = (req, res) => __awaiter(void 0, void 0, void 0, function*
             text: 'Parolanız sıfırlandı: Yeni Parolanız: 123456',
         };
         yield mail_1.default.send(msg);
-        console.log('E-posta gönderildi.');
         res.status(200).json({ message: 'Şifre sıfırlama e-postası gönderildi.' });
     }
     catch (e) {
