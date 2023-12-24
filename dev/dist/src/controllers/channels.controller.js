@@ -22,6 +22,9 @@ const createChannel = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     try {
         const { name, password, creatorMail } = req.body;
         const channelExist = yield ChannelService_1.default.findOne({ name: name });
+        const user = yield UserService_1.default.findOne({ email: creatorMail });
+        if (!user)
+            throw error_1.UserNotExists;
         if (channelExist) {
             throw error_1.ChannelExists;
         }
@@ -33,6 +36,9 @@ const createChannel = (req, res, next) => __awaiter(void 0, void 0, void 0, func
                 _id: (0, uuid_1.v4)(),
                 users: [{ name: creatorMail, tasks: [] }],
             });
+            yield UserService_1.default.updateWhere({ _id: user._id }, { $push: {
+                    role: 'creator'
+                } });
             res.status(200).json({ message: `${name} isimli kanalınız başarıyla oluşmuştur`, channel: channel });
         }
     }

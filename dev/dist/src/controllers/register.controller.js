@@ -55,6 +55,7 @@ function register(req, res, next) {
                 name: name,
                 email: email,
                 password: password,
+                role: ['user'],
             });
             const payload = {
                 user: user,

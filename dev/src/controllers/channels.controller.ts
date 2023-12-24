@@ -12,7 +12,8 @@ const createChannel = async (req: Request, res: Response, next: NextFunction) =>
     try {
         const { name, password, creatorMail } = req.body;
         const channelExist = await ChannelService.findOne({ name: name });
-
+        const user = await UserService.findOne({email:creatorMail})
+        if(!user) throw UserNotExists;
         if (channelExist) {
             throw ChannelExists;
         } else {
@@ -23,7 +24,11 @@ const createChannel = async (req: Request, res: Response, next: NextFunction) =>
                 _id: uuidv4(),
                 users: [{ name: creatorMail, tasks: [] }],
             });
-
+                await UserService.updateWhere(
+                    {_id:user._id},
+                    {$push:{
+                        role:'creator'
+                    }})
             res.status(200).json({ message: `${name} isimli kanalınız başarıyla oluşmuştur`, channel: channel });
         }
     } catch (error) {

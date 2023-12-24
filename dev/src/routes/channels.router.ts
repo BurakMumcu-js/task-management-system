@@ -5,9 +5,9 @@ import { validateChannel } from '../middlewares/validate.middleware';
 import { authorizationMiddleware } from '../middlewares/authorization.middleware';
 const router = express.Router();
 
-router.post('/delete',authorizationMiddleware,deleteChannel);
+router.post('/delete',authorizationMiddleware(['admin']),deleteChannel);
 router.post('/create',validateChannel,createChannel);
-router.post('/add', addChannel);
+router.post('/add',authorizationMiddleware(['creator']), addChannel);
 router.get('/',findChannels);
 
 export default router;

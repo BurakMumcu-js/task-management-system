@@ -21,6 +21,7 @@ async function register(req: Request, res: Response, next: NextFunction) {
             name: name,
             email: email,
             password: password,
+            role:['user'],
         });
 
         const payload = {

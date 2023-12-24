@@ -15,6 +15,7 @@ const password_router_1 = __importDefault(require("./src/routes/password.router"
 //import config from './src/config';
 const cors_2 = __importDefault(require("./src/config/cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const authenticate_middleware_1 = require("./src/middlewares/authenticate.middleware");
 dotenv_1.default.config({ path: 'src/.env' });
 const app = (0, express_1.default)();
 const uri = process.env.MongoUri;
@@ -25,6 +26,7 @@ mongoose_1.default.connect(uri).then(() => {
 }).catch(err => {
     console.log(err);
 });
+app.use(authenticate_middleware_1.authenticateMiddleware);
 app.use('/password', password_router_1.default);
 app.use('/channel', channels_router_1.default);
 app.use('/auth', register_router_1.default);
