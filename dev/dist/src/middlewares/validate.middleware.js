@@ -15,7 +15,6 @@ const channel_model_1 = require("../models/channel.model");
 const validateMiddleware = (schema) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(req);
             yield schema.validateAsync(req.body, { abortEarly: false });
             next();
         }

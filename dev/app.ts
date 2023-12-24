@@ -10,7 +10,7 @@ import passwordRoutes from './src/routes/password.router';
 //import config from './src/config';
 import corsOptions from './src/config/cors';
 import dotenv from 'dotenv';
-
+import {authenticateMiddleware} from './src/middlewares/authenticate.middleware'
 dotenv.config({ path: 'src/.env' });
 
 const app = express();
@@ -25,6 +25,7 @@ mongoose.connect(uri).then(() => {
   console.log(err);
 });
 
+app.use(authenticateMiddleware);
 app.use('/password', passwordRoutes);
 app.use('/channel', channelsRoutes);
 app.use('/auth', registerRoutes);
