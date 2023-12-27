@@ -26,6 +26,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
 const tasks_controller_1 = require("../controllers/tasks.controller");
 const router = express.Router();
-router.post('/add', tasks_controller_1.addTask);
+router.post('/add', /*authorizationMiddleware(['creator']),*/ tasks_controller_1.addTask);
 router.post('/done', tasks_controller_1.doneTask);
 exports.default = router;

@@ -6,8 +6,8 @@ const CreateChannelComponent = () => {
     const channelCreate = async (e) => {
         e.preventDefault();
         try {
-            let creatorMail = JSON.parse(localStorage.getItem('user')).email;
-            let model = {name:name,password:password,creator:creatorMail}
+            let creator = JSON.parse(localStorage.getItem('user'));
+            let model = {name:name,password:password,user:creator}
             axios.post('http://localhost:5000/channel/create',model)
                 .then(res => {
                     let alert = `

@@ -10,6 +10,9 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const UserService_1 = __importDefault(require("../services/UserService"));
 dotenv_1.default.config({ path: 'src/.env' });
 const authenticateMiddleware = (req, res, next) => {
+    console.log('request baslangıc');
+    console.log(req.headers);
+    console.log('request bitiş');
     const token = req.headers.authorization;
     if (!token)
         throw error_1.UserNotExists;

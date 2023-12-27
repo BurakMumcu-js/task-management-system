@@ -3,26 +3,24 @@ import ChannelService from '../services/ChannelService';
 import { FilterQuery } from 'mongoose';
 import UserService from '../services/UserService'
 import { v4 as uuidv4 } from 'uuid';
-import { UserDocument } from '../models/user.model';
-import { ChannelDocument } from '../models/channel.model';
 import mongoose from 'mongoose';
 import { ChannelNotExists, UserNotExists, UserExists, ChannelExists } from '../lib/error';
 
 const createChannel = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { name, password, creatorMail } = req.body;
+        const { name, password, user } = req.body;
         const channelExist = await ChannelService.findOne({ name: name });
-        const user = await UserService.findOne({email:creatorMail})
-        if(!user) throw UserNotExists;
+        const creator = await UserService.findOne({email:user.email})
+        if(!creator) throw UserNotExists;
         if (channelExist) {
             throw ChannelExists;
         } else {
             const channel = await ChannelService.create({
                 name: name,
                 password: password,
-                creator: creatorMail,
+                creator: user.email,
                 _id: uuidv4(),
-                users: [{ name: creatorMail, tasks: [] }],
+                users: [{ name: user.email, tasks: [] }],
             });
                 await UserService.updateWhere(
                     {_id:user._id},

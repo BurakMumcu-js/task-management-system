@@ -25,11 +25,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
 const channels_controller_1 = require("../controllers/channels.controller");
-const validate_middleware_1 = require("../middlewares/validate.middleware");
-const authorization_middleware_1 = require("../middlewares/authorization.middleware");
 const router = express.Router();
-router.post('/delete', (0, authorization_middleware_1.authorizationMiddleware)(['admin']), channels_controller_1.deleteChannel);
-router.post('/create', validate_middleware_1.validateChannel, channels_controller_1.createChannel);
-router.post('/add', (0, authorization_middleware_1.authorizationMiddleware)(['creator']), channels_controller_1.addChannel);
+router.post('/delete' /*authorizationMiddleware(['admin'])*/, channels_controller_1.deleteChannel);
+router.post('/create', /*validateChannel,*/ channels_controller_1.createChannel);
+router.post('/add', /*authorizationMiddleware(['creator']),*/ channels_controller_1.addChannel);
 router.get('/', channels_controller_1.findChannels);
 exports.default = router;

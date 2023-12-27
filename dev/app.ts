@@ -25,7 +25,7 @@ mongoose.connect(uri).then(() => {
   console.log(err);
 });
 
-app.use(authenticateMiddleware);
+//app.use(authenticateMiddleware);
 app.use('/password', passwordRoutes);
 app.use('/channel', channelsRoutes);
 app.use('/auth', registerRoutes);

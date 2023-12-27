@@ -20,10 +20,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const error_1 = require("../lib/error");
 const createChannel = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, password, creatorMail } = req.body;
+        const { name, password, user } = req.body;
         const channelExist = yield ChannelService_1.default.findOne({ name: name });
-        const user = yield UserService_1.default.findOne({ email: creatorMail });
-        if (!user)
+        const creator = yield UserService_1.default.findOne({ email: user.email });
+        if (!creator)
             throw error_1.UserNotExists;
         if (channelExist) {
             throw error_1.ChannelExists;
@@ -32,9 +32,9 @@ const createChannel = (req, res, next) => __awaiter(void 0, void 0, void 0, func
             const channel = yield ChannelService_1.default.create({
                 name: name,
                 password: password,
-                creator: creatorMail,
+                creator: user.email,
                 _id: (0, uuid_1.v4)(),
-                users: [{ name: creatorMail, tasks: [] }],
+                users: [{ name: user.email, tasks: [] }],
             });
             yield UserService_1.default.updateWhere({ _id: user._id }, { $push: {
                     role: 'creator'

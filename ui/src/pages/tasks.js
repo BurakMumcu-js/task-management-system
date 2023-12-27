@@ -12,9 +12,21 @@ const TasksComponent = (props) => {
          }
 
         await axios.post('http://localhost:5000/channel/add',model)
-              .then(response => {
-                  console.log(response)
-              })
+              .then(res => {
+                    let alert = `
+         <div class="alert alert-success">
+            ${res.data.message}
+            ${res.data.message}
+         </div>    
+        `;
+                    const row = document.querySelector('.div');
+                    // beforeBegin , afterBegin , beforeEnd , afterEnd
+                    row.insertAdjacentHTML('beforeBegin',alert);
+                    setTimeout(()=>{
+                        document.querySelector('.alert').remove();
+                    },3000);
+                }
+              )
               .catch(e => {
                   console.log(e.message)
               })
@@ -25,6 +37,7 @@ const TasksComponent = (props) => {
             {
                 props.channel ? (
                     <div>
+                    <div className='div'></div>
                         <h2 style={{textAlign:"center",fontWeight:"bold"}}>{props?.channel?.name}</h2>
                         {
                             props.channel.users.map(user => {

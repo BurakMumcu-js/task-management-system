@@ -7,7 +7,7 @@ export interface AuthorizedRequest extends Request {
 
 export const authorizationMiddleware = (requiredRoles: string[]) => {
     return (req: AuthorizedRequest, res: Response, next: NextFunction) => {
-      // Kullanıcının oturum açmış olması kontrol edilir
+     try {
       if (!req.user) throw UserNotExists;
 
       const userRoles = req.user.role || [];
@@ -18,5 +18,8 @@ export const authorizationMiddleware = (requiredRoles: string[]) => {
       }
   
       next();
+     } catch (error) {
+      next(error);
+     }
     };
   };

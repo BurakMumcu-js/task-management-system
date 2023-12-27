@@ -5,7 +5,7 @@ import { authorizationMiddleware } from '../middlewares/authorization.middleware
 
 const router = express.Router();
 
-router.post('/add',authorizationMiddleware(['creator']),addTask);
+router.post('/add',/*authorizationMiddleware(['creator']),*/addTask);
 router.post('/done', doneTask);
 
 export default router;
