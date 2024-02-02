@@ -23,6 +23,8 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     Cookies.remove('token');
+    Cookies.remove('user');
+    setUser(null);
     setToken(null);
   };
 

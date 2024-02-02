@@ -1,11 +1,13 @@
 import {Link, useNavigate,Outlet} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 
 function LayoutComponent(){
     const navigate = useNavigate()
-    let isAdmin = false;
-
+    const [user,setUser] = useState(null)  
+    const [isAdmin,setIsAdmin] = useState(false);
+    const [isCreator,setIsCreator] = useState(false)  
+    
     const logout = () => {
         Cookies.remove('user');
         Cookies.remove('token');
@@ -17,15 +19,14 @@ function LayoutComponent(){
             navigate('/login');
         }
         else{
-            checkIsAdmin();
+            let user = JSON.parse(Cookies.get('user'))
+            setUser(user);
+            if (user.role.includes('admin'))  
+                setIsAdmin(true); 
+            if (user.role.includes('creator'))  
+                setIsCreator(true);        
         }
     }, [])
-    
-    const checkIsAdmin = () => {
-        let user = JSON.parse(Cookies.get('user'));
-        isAdmin = user.role.includes('admin');
-    }
-    
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-body-secondary">
@@ -41,9 +42,12 @@ function LayoutComponent(){
                             <li className="nav-item active">
                                 <Link className='nav-link' to='/'>Home Page</Link>
                             </li>
-                                <li className="nav-item">
+                               {
+                                isCreator &&
+                                 <li className="nav-item">
                                     <Link className='nav-link' to='/addTask'>Add Task</Link>
                                 </li>
+                                }
                             <li className="nav-item">
                                 <Link className='nav-link' to='/myTasks'>My Tasks</Link>
                             </li>

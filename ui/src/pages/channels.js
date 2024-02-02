@@ -8,7 +8,7 @@ function ChannelsComponent({ onSelect }) {
     useEffect(() => {
         const getChannel = async () => {
             const response = await axios.get('http://localhost:5000/channel');
-            console.log(Cookies.get('user'));
+            
             const localUser = JSON.parse(Cookies.get('user'))
             let userChannels = [];
             response.data.filter(item => {

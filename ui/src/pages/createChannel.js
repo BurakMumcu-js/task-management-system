@@ -1,12 +1,13 @@
 import {useState} from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const CreateChannelComponent = () => {
 
     const channelCreate = async (e) => {
         e.preventDefault();
         try {
-            let creator = JSON.parse(localStorage.getItem('user'));
+            let creator = JSON.parse(Cookies.get('user'));
             let model = {name:name,password:password,user:creator}
             axios.post('http://localhost:5000/channel/create',model)
                 .then(res => {
