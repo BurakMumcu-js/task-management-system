@@ -13,11 +13,12 @@ import MyTasksComponent from "./pages/myTasks";
 import PasswordComponent from "./pages/forgotPassword";
 import DeleteChannelComponent from "./pages/deleteChannel";
 import ResetPasswordForm from './pages/resetPassword';
+import { AuthProvider } from './Auth.Provider';
 
 function AppComponent  ()  {
-  return(
-      <>
-          <BrowserRouter>
+  return(    
+      <AuthProvider>
+      <BrowserRouter>
               <Routes>
                   <Route path='/' element={<LayoutComponent/>}>
                       <Route index element={<HomeComponent/>}></Route>
@@ -32,7 +33,7 @@ function AppComponent  ()  {
                   <Route path='resetPasswordForm' element={<ResetPasswordForm/>}></Route>
               </Routes>
           </BrowserRouter>
-      </>
+      </AuthProvider>
   )
 }
 

@@ -1,5 +1,6 @@
 import react, {useEffect, useState} from 'react';
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 const TasksComponent = (props) => {
     const [addedMail,setAddedMail] = useState('')
@@ -60,7 +61,7 @@ const TasksComponent = (props) => {
                                 )
                             })
                         }
-                        { JSON.parse(localStorage.getItem('user')).email === props.channel.creator ?
+                        { JSON.parse(Cookies.get('user')).email === props.channel.creator ?
                             <div className='card' style={{width:500,marginLeft:300}}>
                                 <div className='card-header'>
                                     Üye Ekleme Alanı

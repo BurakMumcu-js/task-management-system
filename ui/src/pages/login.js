@@ -1,19 +1,17 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import React, {useState,useContext}  from "react";
 import axios from "axios";
+import {AuthProvider,AuthContext} from "../Auth.Provider"
 
 function LoginComponent(){
     const navigate = useNavigate();
     const [email,setEmail] = useState('');
     const [password,setPassword]= useState('');
-
-    const login = async (e) => {
-        e.preventDefault();
+    const { login } = useContext(AuthContext);
+    const handleSubmit = async (e) => {
         try {
-            let model = {email: email, password: password}
-            let response = await axios.post('http://localhost:5000/auth/login',model);
-            localStorage.setItem('token',response.data.token)
-            localStorage.setItem('user',JSON.stringify(response.data.user))
+            e.preventDefault();
+            login(email,password)
             navigate('/')
         } catch (error) {
             console.log(error)
@@ -28,7 +26,7 @@ function LoginComponent(){
                             <h1>  Giriş Sayfası </h1>
                         </div>
                         <div className='card-body'>
-                            <form onSubmit={login}>
+                            <form onSubmit={handleSubmit}>
                                 <div className='form-group'>
                                     <label htmlFor='email'>Mail Adresi</label>
                                     <input value={email} onChange={(e)=>{

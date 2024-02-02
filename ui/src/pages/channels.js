@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import TasksComponent from "./tasks";
+import Cookies from 'js-cookie';
 
 function ChannelsComponent({ onSelect }) {
     const [channels, setChannels] = useState(null);
     useEffect(() => {
         const getChannel = async () => {
             const response = await axios.get('http://localhost:5000/channel');
-            const localUser = JSON.parse(localStorage.getItem('user'))
+            console.log(Cookies.get('user'));
+            const localUser = JSON.parse(Cookies.get('user'))
             let userChannels = [];
             response.data.filter(item => {
                 item.users.map(user => {

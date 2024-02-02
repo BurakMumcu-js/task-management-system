@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 function MyTasksComponent() {
     const [channels,setChannels] = useState(null);
@@ -48,7 +49,7 @@ function MyTasksComponent() {
                     <div className='card-header'>{channel.name}</div>
                     <div className='card-body'>
                         {channel.users.map(user => {
-                            if (user.email === JSON.parse(localStorage.getItem('user')).email) {
+                            if (user.email === JSON.parse(Cookies.get('user')).email) {
                                 return user.tasks.map((task, index) => (
                                     <div className='card'style={{margin:10}} key={index}>
                                         <div className='card-header'>{index + 1}. {task.title}</div>

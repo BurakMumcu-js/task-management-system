@@ -1,28 +1,31 @@
 import {Link, useNavigate,Outlet} from "react-router-dom";
 import {useEffect} from "react";
+import Cookies from "js-cookie";
 
 function LayoutComponent(){
     const navigate = useNavigate()
-    let isAdmin = false
+    let isAdmin = false;
 
     const logout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        navigate('/login')
+        Cookies.remove('user');
+        Cookies.remove('token');
+        navigate('/login');
     }
-
-    useEffect(()=>{
-        if(!localStorage.getItem('token')){
+    
+    useEffect(() => {
+        if (!Cookies.get('token') || !Cookies.get('user')) {
             navigate('/login');
         }
-    })
-
+        else{
+            checkIsAdmin();
+        }
+    }, [])
+    
     const checkIsAdmin = () => {
-        let user = JSON.parse(localStorage.getItem('user'))
-        isAdmin = user.isAdmin
+        let user = JSON.parse(Cookies.get('user'));
+        isAdmin = user.role.includes('admin');
     }
-    checkIsAdmin()
-
+    
     return(
         <>
             <nav className="navbar navbar-expand-lg bg-body-secondary">

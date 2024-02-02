@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 const AddTaskComponent = () => {
     const [channels, setChannels] = useState(null);
@@ -7,7 +8,7 @@ const AddTaskComponent = () => {
     const [content,setContent] = useState('');
     const [deadline,setDeadline] = useState(null)
     const creatorChannels = []
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(Cookies.get('user'));
     useEffect(() => {
         const getChannel = async () => {
             const response = await axios.get('http://localhost:5000/channel');

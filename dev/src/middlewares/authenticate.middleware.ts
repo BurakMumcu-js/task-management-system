@@ -10,10 +10,7 @@ export interface AuthenticatedRequest extends Request {
   }
 
 export const authenticateMiddleware = (req:AuthenticatedRequest,res:Response,next:NextFunction) => {
-   console.log('request baslangıc')
-    console.log(req.headers);
-    console.log('request bitiş')
-    const token = req.headers.authorization;
+    const token = req.cookies.token;
     if(!token) throw UserNotExists;
     try {
         const decodedToken = jwt.verify(token,process.env.SECRET_KEY as string) as {userId : number};

@@ -24,16 +24,15 @@ mongoose.connect(uri).then(() => {
 }).catch(err => {
   console.log(err);
 });
-
-//app.use(authenticateMiddleware);
-app.use('/password', passwordRoutes);
-app.use('/channel', channelsRoutes);
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
+app.use(authenticateMiddleware);
+app.use('/password', passwordRoutes);
+app.use('/channel', channelsRoutes);
 app.use('/task', tasksRoutes);
 app.use(mainErrorHandler);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 const server = app.listen(port, () => {
   console.log(`Port ${port} dinleme modunda...`);

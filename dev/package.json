@@ -2,7 +2,7 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
-    "watch": "nodemon dist/app.js"
+    "watch": "nodemon --watch src --ext ts --exec ts-node app.ts"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.0",
